@@ -33,11 +33,10 @@ def image_loader(path, size=None, normalize=False):
 def image_unloader(tensor, normalize=False):
     unloader = transforms.ToPILImage()
     if normalize:
-        unloader = transforms.Compose([unloader,
-                                       transforms.Normalize(mean=[0., 0., 0.],
+        unloader = transforms.Compose([transforms.Normalize(mean=[0., 0., 0.],
                                                             std=[1/0.229, 1/0.224, 1/0.225]),
                                        transforms.Normalize(mean=[-0.485, -0.456, -0.406],
-                                                            std=[1., 1., 1.])])
+                                                            std=[1., 1., 1.]), unloader])
     return unloader(tensor)
 
 
